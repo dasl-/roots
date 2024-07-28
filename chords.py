@@ -48,6 +48,15 @@ def enumerate_root_position_chords():
 
     return root_position_chords
 
+base = {"C": 24, "D": 26, "E": 28, "F": 29, "G": 31, "A": 33, "B": 35}
+
+def note_to_midi(note):
+    note, octave = note[0], note[1]
+    out = base[note]
+    out += int(octave) * 12
+    return out
+
+
 def main():
     root_position_chords = enumerate_root_position_chords()
     print(f"root position chords: {root_position_chords}\n")
@@ -55,6 +64,12 @@ def main():
     for chord in root_position_chords:
         all_chords += enumerate_inversions(chord)
     print(f"all chords: {all_chords}")
+
+    for chord in all_chords:
+        print([note_to_midi(note) for note in chord])
+
+
+
 
 
 main()
