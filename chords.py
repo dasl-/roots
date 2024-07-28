@@ -65,9 +65,14 @@ def main():
         all_chords += enumerate_inversions(chord)
     print(f"all chords: {all_chords}")
 
+    print("int chords[][4] = {")
     for chord in all_chords:
-        print([note_to_midi(note) for note in chord])
-
+        notes = [str(note_to_midi(note)) for note in chord]
+        if len(notes) == 3:
+            notes.append("0")
+        print("    {" + ",".join(notes) + "},")
+    print("}")
+    print(len(all_chords))
 
 
 
