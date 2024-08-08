@@ -76,17 +76,13 @@ cd ~/Documents/arduino/libraries/ML_SynthTools && git apply <(curl -s https://gi
 Install esp32 boards in Arduino, version 2.0.2:
 1. Tools > Board > Boards Manager
 1. Search `esp32`
-1. Select version 2.0.2 and Install
-![](./docs/install_esp32_boards.png)
+1. Select version 2.0.2 and Install ![](./docs/install_esp32_boards.png)
+1. Tools > Board > ESP32 Arduino > ESP32 Dev Module
 
-Symlink python to python3:
-```
-sudo ln -s $(which python3) /usr/local/bin/python
-```
 
-Open Arduino via command line - this is necessary so that it gets your system's $PATH which contains has the `python` binary:
+Workaround for error: `exec: "python": executable file not found in $PATH`: https://github.com/espressif/arduino-esp32/issues/4717#issuecomment-1070801525
 ```
-open /Applications/Arduino\ 2.app
+sed -i -e 's/=python /=python3 /g' ~/Library/Arduino15/packages/esp32/hardware/esp32/*/platform.txt
 ```
 
 ```
