@@ -14,75 +14,81 @@ You need to also "activate the serial bus" as a midi device in Audio Midi Setup 
 
 ## Initial setup
 
-Install Arduino 1.8.13
+Install Arduino 1.8.13: https://www.arduino.cc/en/software/OldSoftwareReleases
 
-Download https://github.com/jordanlewis/ml_synth_organ_example into ~/Documents/Arduino
+Clone https://github.com/jordanlewis/ml_synth_organ_example into ~/Documents/Arduino:
+```
+mkdir ~/Documents/Arduino/ml_synth_organ_example && git clone git@github.com:jordanlewis/ml_synth_organ_example.git ~/Documents/Arduino/ml_synth_organ_example
+```
 
-Clone the following libraries:
+Install various arduino libraries:
+```
+brew install arduino-cli
+arduino-cli lib install 'Adafruit NeoPixel' arduino-timer ArduinoBLE BLE-MIDI 'MIDI Library' NimBLE-Arduino 'USB Host Shield Library 2.0'
+```
 
-Adafruit NeoPixel           1.8.3     1.12.3    user     Arduino library for controlling singl...
+You should now have libraries installed:
+```
+% ls -l ~/Documents/Arduino/libraries
+total 8
+drwxr-xr-x    7 dleibovic  staff   224 Feb 22  2014 Adafruit_NeoPixel
+drwxr-xr-x   11 dleibovic  staff   352 Aug  7 21:17 ArduinoBLE
+drwxr-xr-x   10 dleibovic  staff   320 Aug  7 21:17 BLE-MIDI
+drwxr-xr-x    7 dleibovic  staff   224 Feb 22  2014 MIDI
+drwxr-xr-x   17 dleibovic  staff   544 Aug  7 21:17 MIDI_Library
+drwxr-xr-x    9 dleibovic  staff   288 Aug  7 21:17 NimBLE-Arduino
+drwxr-xr-x  108 dleibovic  staff  3456 Aug  7 21:17 USB_Host_Shield_Library_2.0
+drwxr-xr-x   11 dleibovic  staff   352 Aug  7 21:17 arduino-timer
+drwxr-xr-x    4 dleibovic  staff   128 Feb 22  2014 flash_color
+drwxr-xr-x    5 dleibovic  staff   160 Feb 22  2014 midilooper_bus
+drwxr-xr-x    5 dleibovic  staff   160 Feb 22  2014 midilooper_channel
+drwxr-xr-x    4 dleibovic  staff   128 Feb 22  2014 midilooper_instruction
+drwxr-xr-x    5 dleibovic  staff   160 Feb 22  2014 midilooper_loop
+-rw-r--r--    1 dleibovic  staff    83 Feb 22  2014 readme.txt
+
+% arduino-cli lib list
+Name                        Installed Available Location Description
+Adafruit_NeoPixel                     -         user     -
 arduino-timer               3.0.1     -         user     -
 ArduinoBLE                  1.3.7     -         user     -
-audio-driver                0.0.1     -         user     -
-audio-tools                 0.9.8     -         user     -
-audio-tools midi            0.8       -         user     -
 BLE-MIDI                    2.2       -         user     -
+flash_color                           -         user     -
+MIDI                                  -         user     -
 MIDI Library                5.0.2     -         user     -
-ML SynthTools               1.3.1     -         user     -
+midilooper_bus                        -         user     -
+midilooper_channel                    -         user     -
+midilooper_instruction                -         user     -
+midilooper_loop                       -         user     -
 NimBLE-Arduino              1.4.2     -         user     -
 USB Host Shield Library 2.0 1.7.0     -         user     -
-
-clone this into the libraries directory https://github.com/marcel-licence/ML_SynthTools?tab=readme-ov-file
-
-Apply the following diff:
-
-```
-diff --git a/src/boards/board_audio_kit_es8388.h b/src/boards/board_audio_kit_es8388.h
-index cf21f04..b8d0a36 100644
---- a/src/boards/board_audio_kit_es8388.h
-+++ b/src/boards/board_audio_kit_es8388.h
-@@ -53,8 +53,8 @@
- #define BOARDS_BOARD_AUDIO_KIT_ES8388_H_
-
-
--#define ES8388_CFG_I2C  1
--#define ES8388_CFG_I2S  4
-+#define ES8388_CFG_I2C  2
-+#define ES8388_CFG_I2S  5
-
-
- /* on board led */
-diff --git a/src/ml_inline.h b/src/ml_inline.h
-index 8398f96..b829f3a 100644
---- a/src/ml_inline.h
-+++ b/src/ml_inline.h
-@@ -41,11 +41,11 @@
- #include <es8388.h>
- #include <esp32_audio_kit_module.h>
- #if (defined ESP32) || (defined ESP8266) || (defined ARDUINO_RASPBERRY_PI_PICO) || (defined ARDUINO_GENERIC_RP2040)
--#include <fs\fs_access.h>
--#include <fs\fs_common.h>
--#include <fs\fs_esp32.h>
--#include <fs\fs_esp8266.h>
--#include <fs\fs_rp2040.h>
-+#include <fs/fs_access.h>
-+#include <fs/fs_common.h>
-+#include <fs/fs_esp32.h>
-+#include <fs/fs_esp8266.h>
-+#include <fs/fs_rp2040.h>
- #endif
- #include <i2s_interface.h>
- #include <i2s_module.h>
 ```
 
+clone this into the libraries directory https://github.com/marcel-licence/ML_SynthTools?tab=readme-ov-file :
+```
+mkdir ~/Documents/arduino/libraries/ML_SynthTools && git clone git@github.com:marcel-licence/ML_SynthTools.git ~/Documents/arduino/libraries/ML_SynthTools
+```
 
-Install esp32 boards in Arduino, version 2.0.2
+Apply the following diff: https://gist.github.com/dasl-/fcd9812ba9954f5f6cecb735b31631d9
+```
+cd ~/Documents/arduino/libraries/ML_SynthTools && git apply <(curl -s https://gist.githubusercontent.com/dasl-/fcd9812ba9954f5f6cecb735b31631d9/raw/52821e5d5554a5e07c2c5439d5c5c7c018b4d87c/diff.diff)
+```
 
-Symlink python to python3
+Install esp32 boards in Arduino, version 2.0.2:
+1. Tools > Board > Boards Manager
+1. Search `esp32`
+1. Select version 2.0.2 and Install
+![](./docs/install_esp32_boards.png)
 
+Symlink python to python3:
+```
 sudo ln -s $(which python3) /usr/local/bin/python
+```
 
+Open Arduino via command line - this is necessary so that it gets your system's $PATH which contains has the `python` binary:
+```
 open /Applications/Arduino\ 2.app
+```
 
+```
 sudo python3 -m pip install --upgrade --break-system-packages python-rtmidi pyserial
-
+```
