@@ -76,7 +76,7 @@ cd ~/Documents/arduino/libraries/ML_SynthTools && git apply <(curl -s https://gi
 Install esp32 boards in Arduino, version 2.0.2:
 1. Tools > Board > Boards Manager
 1. Search `esp32`
-1. Select version 2.0.2 and Install <img src="docs/install_esp32_boards.png" width="300"/>
+1. Select version 2.0.2 and Install <img src="docs/install_esp32_boards.png" width="700"/>
 1. Tools > Board > ESP32 Arduino > ESP32 Dev Module
 
 
