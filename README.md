@@ -76,15 +76,16 @@ cd ~/Documents/arduino/libraries/ML_SynthTools && git apply <(curl -s https://gi
 Install esp32 boards in Arduino, version 2.0.2:
 1. Tools > Board > Boards Manager
 1. Search `esp32`
-1. Select version 2.0.2 and Install ![](./docs/install_esp32_boards.png)
+1. Select version 2.0.2 and Install <img src="docs/install_esp32_boards.png" width="300"/>
 1. Tools > Board > ESP32 Arduino > ESP32 Dev Module
 
 
-Workaround for error: `exec: "python": executable file not found in $PATH`: https://github.com/espressif/arduino-esp32/issues/4717#issuecomment-1070801525
+[Workaround](https://github.com/espressif/arduino-esp32/issues/4717#issuecomment-1070801525) for error: `exec: "python": executable file not found in $PATH`:
 ```
 sed -i -e 's/=python /=python3 /g' ~/Library/Arduino15/packages/esp32/hardware/esp32/*/platform.txt
 ```
 
+Install python libraries for `serialmidi.py` (see above):
 ```
 sudo python3 -m pip install --upgrade --break-system-packages python-rtmidi pyserial
 ```
