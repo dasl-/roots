@@ -89,3 +89,10 @@ Install python libraries for `serialmidi.py` (see above):
 ```
 sudo python3 -m pip install --upgrade --break-system-packages python-rtmidi pyserial
 ```
+
+Clone https://github.com/jordanlewis/esp32_fm_synth into into ~/Documents/Arduino:
+```
+mkdir ~/Documents/Arduino/esp32_fm_synth && git clone git@github.com:jordanlewis/esp32_fm_synth.git ~/Documents/Arduino/esp32_fm_synth
+```
+
+Open `~/Documents/Arduino/esp32_fm_synth/esp32_fm_synth.ino` in the Arduino IDE and edit as desired.
