@@ -3,13 +3,11 @@
 def enumerate_inversions(chord):
     inversions = [chord]
     inversion = chord
-    for note_with_octave in chord:
-        if note_with_octave == chord[-1]:
-            break
+    for i, note_with_octave in enumerate(chord[:-1]):
         note = note_with_octave[0]
         octave = int(note_with_octave[1])
-        inversion = inversion[1:]
-        inversion.append(f'{note}{octave + 1}')
+        inversion = inversion[:]
+        inversion[i] = f'{note}{octave + 1}'
         inversions.append(inversion)
     return inversions
 
@@ -48,7 +46,7 @@ def enumerate_root_position_chords():
 
     return root_position_chords
 
-base = {"C": 24, "D": 26, "E": 28, "F": 29, "G": 31, "A": 33, "B": 35}
+base = {"C": 12, "D": 14, "E": 16, "F": 17, "G": 19, "A": 21, "B": 23}
 
 def note_to_midi(note):
     note, octave = note[0], note[1]
