@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Enumerate every possible Major, Minor, Major 7th and Minor 7th chord 
 # and all possible inversions, beginning with A2 and ending with D5.
 def enumerate_inversions(chord):
