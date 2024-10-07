@@ -103,3 +103,11 @@ LEDs work with sound on these pins: 21, 22, 23, 18, 5
 
 ### bad pins:
 0, 19
+
+## FastLED LED driver
+* I tried using `#define FASTLED_RMT_BUILTIN_DRIVER 1` just before the `#include <FastLED.h>` line. It crashed
+* I tried using `#define FASTLED_ESP32_I2S true` juts before the `#include <FastLED.h>` line. It also crashed
+* Maybe it's because we're using a very outdated arduino  ESP32 board library in order to be compatible with the ML Synth project? See: https://github.com/FastLED/FastLED/issues/1642#issuecomment-2387903370
+* We can try these settings again after ML Synth is compatible with a more recent ESP32 board library. See: https://github.com/marcel-licence/ML_SynthTools/issues/49
+* So I'm using whichever driver is the default. It takes 6-7ms to send the signal to a single strip of 200 LEDs.
+* If I use 2 GPIO pins to drive 2 separate strips, each of which is 200 LEDs, it still takes 6-7ms to send the signal. So it works in parallel when using multiple pins.
