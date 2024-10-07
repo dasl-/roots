@@ -96,3 +96,10 @@ mkdir ~/Documents/Arduino/esp32_fm_synth && git clone git@github.com:jordanlewis
 ```
 
 Open `~/Documents/Arduino/esp32_fm_synth/esp32_fm_synth.ino` in the Arduino IDE and edit as desired.
+
+## GPIO Pins
+### good pins:
+LEDs work with sound on these pins: 21, 22, 23, 18, 5
+
+### bad pins:
+0, 19
