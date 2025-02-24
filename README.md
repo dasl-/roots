@@ -63,14 +63,9 @@ NimBLE-Arduino              1.4.2     -         user     -
 USB Host Shield Library 2.0 1.7.0     -         user     -
 ```
 
-clone this into the libraries directory https://github.com/marcel-licence/ML_SynthTools?tab=readme-ov-file :
+clone this into the libraries directory https://github.com/dasl-/ML_SynthTools :
 ```
-mkdir ~/Documents/arduino/libraries/ML_SynthTools && git clone git@github.com:marcel-licence/ML_SynthTools.git ~/Documents/arduino/libraries/ML_SynthTools
-```
-
-Apply the following diff: https://gist.github.com/dasl-/fcd9812ba9954f5f6cecb735b31631d9
-```
-cd ~/Documents/arduino/libraries/ML_SynthTools && git apply <(curl -s https://gist.githubusercontent.com/dasl-/fcd9812ba9954f5f6cecb735b31631d9/raw/52821e5d5554a5e07c2c5439d5c5c7c018b4d87c/diff.diff)
+mkdir ~/Documents/arduino/libraries/ML_SynthTools && git clone git@github.com:dasl-/ML_SynthTools.git ~/Documents/arduino/libraries/ML_SynthTools
 ```
 
 Install esp32 boards in Arduino, version 2.0.2:
@@ -78,7 +73,6 @@ Install esp32 boards in Arduino, version 2.0.2:
 1. Search `esp32`
 1. Select version 2.0.2 and Install <img src="docs/install_esp32_boards.png" width="700"/>
 1. Tools > Board > ESP32 Arduino > ESP32 Dev Module
-
 
 [Workaround](https://github.com/espressif/arduino-esp32/issues/4717#issuecomment-1070801525) for error: `exec: "python": executable file not found in $PATH`:
 ```
