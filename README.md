@@ -98,6 +98,12 @@ LEDs work with sound on these pins: 21, 22, 23, 18, 5
 ### bad pins:
 0, 19
 
+## LED indexes
+
+In [the code](https://github.com/jordanlewis/esp32_fm_synth/blob/main/esp32_fm_synth.ino), each branch's LED strip has an index that we use to access that particular LED strip. The indexes are numbered 0 - 6. Here is an image demonstrating which index corresponds to which branch:
+
+<img src="docs/led_indexes.jpg" width="400"/>
+
 ## FastLED LED driver
 * I tried using `#define FASTLED_RMT_BUILTIN_DRIVER 1` just before the `#include <FastLED.h>` line. It crashed
 * I tried using `#define FASTLED_ESP32_I2S true` juts before the `#include <FastLED.h>` line. It also crashed
