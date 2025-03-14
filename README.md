@@ -1,16 +1,4 @@
-# TODO
-
-## Development
-
-### Midi input for the esp32
-
-Once you flash the board, it's convenient to be be able to send the board midi signals and also read debug data that the board is sending back. To do that, use the serialmidi.py file which is a copy of the serialmidi project that just prints incoming messages rather than interpreting them as midi. Run it like this:
-
-```
- python3 serialmidi.py --serial_name=/dev/cu.usbserial-0001 --midi_in_name="Circuit"  --midi_out_name="IAC Driver Bus 1"  --debug
-```
-
-You need to also "activate the serial bus" as a midi device in Audio Midi Setup to get this to work. Also you'll need to use the right midi_in_name, in my case I am using a novation circuit controller which appears as "Circuit".
+# Roots
 
 ## Initial setup
 
@@ -21,49 +9,15 @@ Clone https://github.com/jordanlewis/ml_synth_organ_example into ~/Documents/Ard
 mkdir ~/Documents/Arduino/ml_synth_organ_example && git clone git@github.com:jordanlewis/ml_synth_organ_example.git ~/Documents/Arduino/ml_synth_organ_example
 ```
 
-Install various arduino libraries:
+Install various arduino libraries. It might be possible to upgrade these libraries, but these are the known working versions that we use:
 ```
 brew install arduino-cli
-arduino-cli lib install 'Adafruit NeoPixel' arduino-timer ArduinoBLE BLE-MIDI 'MIDI Library' NimBLE-Arduino 'USB Host Shield Library 2.0'
+arduino-cli lib install 'Adafruit NeoPixel'@1.12.3 arduino-timer@3.0.1 ArduinoBLE@1.3.7 BLE-MIDI@2.2 FastLED@3.7.8 'MIDI Library'@5.0.2 NimBLE-Arduino@1.4.2 'USB Host Shield Library 2.0'@1.7.0
 ```
 
-You should now have libraries installed:
-```
-% ls -l ~/Documents/Arduino/libraries
-total 8
-drwxr-xr-x    7 dleibovic  staff   224 Feb 22  2014 Adafruit_NeoPixel
-drwxr-xr-x   11 dleibovic  staff   352 Aug  7 21:17 ArduinoBLE
-drwxr-xr-x   10 dleibovic  staff   320 Aug  7 21:17 BLE-MIDI
-drwxr-xr-x    7 dleibovic  staff   224 Feb 22  2014 MIDI
-drwxr-xr-x   17 dleibovic  staff   544 Aug  7 21:17 MIDI_Library
-drwxr-xr-x    9 dleibovic  staff   288 Aug  7 21:17 NimBLE-Arduino
-drwxr-xr-x  108 dleibovic  staff  3456 Aug  7 21:17 USB_Host_Shield_Library_2.0
-drwxr-xr-x   11 dleibovic  staff   352 Aug  7 21:17 arduino-timer
-drwxr-xr-x    4 dleibovic  staff   128 Feb 22  2014 flash_color
-drwxr-xr-x    5 dleibovic  staff   160 Feb 22  2014 midilooper_bus
-drwxr-xr-x    5 dleibovic  staff   160 Feb 22  2014 midilooper_channel
-drwxr-xr-x    4 dleibovic  staff   128 Feb 22  2014 midilooper_instruction
-drwxr-xr-x    5 dleibovic  staff   160 Feb 22  2014 midilooper_loop
--rw-r--r--    1 dleibovic  staff    83 Feb 22  2014 readme.txt
+In case any of these libraries disappear in the future, see also `libraries.zip` which is an archive of these libraries at the above noted versions.
 
-% arduino-cli lib list
-Name                        Installed Available Location Description
-Adafruit_NeoPixel                     -         user     -
-arduino-timer               3.0.1     -         user     -
-ArduinoBLE                  1.3.7     -         user     -
-BLE-MIDI                    2.2       -         user     -
-flash_color                           -         user     -
-MIDI                                  -         user     -
-MIDI Library                5.0.2     -         user     -
-midilooper_bus                        -         user     -
-midilooper_channel                    -         user     -
-midilooper_instruction                -         user     -
-midilooper_loop                       -         user     -
-NimBLE-Arduino              1.4.2     -         user     -
-USB Host Shield Library 2.0 1.7.0     -         user     -
-```
-
-clone this into the libraries directory https://github.com/dasl-/ML_SynthTools :
+clone our [fork of ML_SynthTools](https://github.com/dasl-/ML_SynthTools) into the libraries directory:
 ```
 mkdir ~/Documents/arduino/libraries/ML_SynthTools && git clone git@github.com:dasl-/ML_SynthTools.git ~/Documents/arduino/libraries/ML_SynthTools
 ```
@@ -89,20 +43,27 @@ Clone https://github.com/jordanlewis/esp32_fm_synth into into ~/Documents/Arduin
 mkdir ~/Documents/Arduino/esp32_fm_synth && git clone git@github.com:jordanlewis/esp32_fm_synth.git ~/Documents/Arduino/esp32_fm_synth
 ```
 
-Open `~/Documents/Arduino/esp32_fm_synth/esp32_fm_synth.ino` in the Arduino IDE and edit as desired.
+Open [`~/Documents/Arduino/esp32_fm_synth/esp32_fm_synth.ino`](https://github.com/jordanlewis/esp32_fm_synth/blob/main/esp32_fm_synth.ino) in the Arduino IDE and edit as desired.
 
 ## GPIO Pins
-### good pins:
-LEDs work with sound on these pins: 21, 22, 23, 18, 5
-
-### bad pins:
-0, 19
+* good pins -- LEDs work with sound on these pins: 21, 22, 23, 18, 5
+* bad pins -- these are not compatible with sound: 0, 19
 
 ## LED indexes
 
 In [the code](https://github.com/jordanlewis/esp32_fm_synth/blob/main/esp32_fm_synth.ino), each branch's LED strip has an index that we use to access that particular LED strip. The indexes are numbered 0 - 6. Here is an image demonstrating which index corresponds to which branch:
 
 <img src="docs/led_indexes.jpg" width="400"/>
+
+## Midi input for the esp32
+
+Once you flash the board, it's convenient to be be able to send the board midi signals and also read debug data that the board is sending back. To do that, use the serialmidi.py file which is a copy of the serialmidi project that just prints incoming messages rather than interpreting them as midi. Run it like this:
+
+```
+ python3 serialmidi.py --serial_name=/dev/cu.usbserial-0001 --midi_in_name="Circuit"  --midi_out_name="IAC Driver Bus 1"  --debug
+```
+
+You need to also "activate the serial bus" as a midi device in Audio Midi Setup to get this to work. Also you'll need to use the right midi_in_name, in my case I am using a novation circuit controller which appears as "Circuit".
 
 ## FastLED LED driver
 * I tried using `#define FASTLED_RMT_BUILTIN_DRIVER 1` just before the `#include <FastLED.h>` line. It crashed
