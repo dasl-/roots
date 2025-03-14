@@ -2,9 +2,9 @@
 
 ## Initial setup
 
-Install Arduino 1.8.13: https://www.arduino.cc/en/software/OldSoftwareReleases
+Install [Arduino 1.8.13](https://www.arduino.cc/en/software/OldSoftwareReleases).
 
-Clone https://github.com/jordanlewis/ml_synth_organ_example into ~/Documents/Arduino:
+Clone our [fork of ml_synth_organ_example](https://github.com/jordanlewis/ml_synth_organ_example) into `~/Documents/Arduino`:
 ```
 mkdir ~/Documents/Arduino/ml_synth_organ_example && git clone git@github.com:jordanlewis/ml_synth_organ_example.git ~/Documents/Arduino/ml_synth_organ_example
 ```
@@ -17,7 +17,7 @@ arduino-cli lib install 'Adafruit NeoPixel'@1.12.3 arduino-timer@3.0.1 ArduinoBL
 
 In case any of these libraries disappear in the future, see also `libraries.zip` which is an archive of these libraries at the above noted versions.
 
-clone our [fork of ML_SynthTools](https://github.com/dasl-/ML_SynthTools) into the libraries directory:
+Clone our [fork of ML_SynthTools](https://github.com/dasl-/ML_SynthTools) into the libraries directory:
 ```
 mkdir ~/Documents/arduino/libraries/ML_SynthTools && git clone git@github.com:dasl-/ML_SynthTools.git ~/Documents/arduino/libraries/ML_SynthTools
 ```
@@ -38,7 +38,7 @@ Install python libraries for `serialmidi.py` (see above):
 sudo python3 -m pip install --upgrade --break-system-packages python-rtmidi pyserial
 ```
 
-Clone https://github.com/jordanlewis/esp32_fm_synth into into ~/Documents/Arduino:
+Clone our [fork of esp32_fm_synth](https://github.com/jordanlewis/esp32_fm_synth) into `~/Documents/Arduino`:
 ```
 mkdir ~/Documents/Arduino/esp32_fm_synth && git clone git@github.com:jordanlewis/esp32_fm_synth.git ~/Documents/Arduino/esp32_fm_synth
 ```
