@@ -75,5 +75,3 @@ You need to also "activate the serial bus" as a midi device in Audio Midi Setup 
 
 ## Power consumption
 The entire project (LEDs + esp32 microcontroller) uses about 0.10 amps as measured by a Kill-A-Watt. Seemed to use between 0.06 - 0.12 amps. Powered at 5 volts.
-
-## FastLED LED driver
