@@ -72,3 +72,8 @@ You need to also "activate the serial bus" as a midi device in Audio Midi Setup 
 * We can try these settings again after ML Synth is compatible with a more recent ESP32 board library. See: https://github.com/marcel-licence/ML_SynthTools/issues/49
 * So I'm using whichever driver is the default. It takes 6-7ms to send the signal to a single strip of 200 LEDs.
 * If I use 2 GPIO pins to drive 2 separate strips, each of which is 200 LEDs, it still takes 6-7ms to send the signal. So it works in parallel when using multiple pins.
+
+## Power consumption
+The entire project (LEDs + esp32 microcontroller) uses about 0.10 amps as measured by a Kill-A-Watt. Seemed to use between 0.06 - 0.12 amps. Powered at 5 volts.
+
+## FastLED LED driver
